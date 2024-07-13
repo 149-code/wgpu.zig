@@ -1,6 +1,7 @@
 PYTHON_CMD=python3.11
 
 all:
+	git submodule update --init
 	git -C ./wgpu-native/ submodule update --init
 	cargo build --manifest-path wgpu-native/Cargo.toml -r
 	cp wgpu-native/ffi/wgpu.h include/wgpu.h
