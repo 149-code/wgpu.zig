@@ -106,7 +106,7 @@ pub const InstanceExtras = extern struct {
 pub const DeviceExtras = extern struct {
     chain: ChainedStruct,
     trace_path: [*:0]const u8,
-}
+};
 
 pub const NativeLimits = extern struct {
     max_push_pub constant_size: u32,
