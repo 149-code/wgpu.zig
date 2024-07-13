@@ -109,7 +109,7 @@ pub const DeviceExtras = extern struct {
 };
 
 pub const NativeLimits = extern struct {
-    max_push_pub constant_size: u32,
+    max_push_constant_size: u32,
     max_non_sampler_bindings: u32,
 };
 
