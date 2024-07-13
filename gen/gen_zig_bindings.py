@@ -270,7 +270,8 @@ const ChainedStructOut = extern struct {
 
                 c_exprs += ["@ptrCast(&callback)", "@ptrCast(user_data)"]
 
-                stream.write(f"    pub inline fn {method['name']}({', '.join(args_string)}) void {{\n")
+                method_name = underscore_to_function(method['name'])
+                stream.write(f"    pub inline fn {method_name}({', '.join(args_string)}) void {{\n")
                 stream.write(f"        c.{c_function_name}({', '.join(c_exprs)});\n")
                 stream.write(f"    }}\n")
             else:
@@ -313,7 +314,7 @@ const ChainedStructOut = extern struct {
                             else:
                                 ret_type = f"*{translate_typename(method['returns']['type'])}"
 
-                    stream.write(f"\n    pub inline fn {method['name']}({', '.join(args_string)}) {ret_type} {{\n")
+                    stream.write(f"\n    pub inline fn {underscore_to_function(method['name'])}({', '.join(args_string)}) {ret_type} {{\n")
 
                     for line in method_lines:
                         stream.write(line)
@@ -335,7 +336,8 @@ const ChainedStructOut = extern struct {
                         raise Exception(f"Unexpected ret type: {method['returns']}")
                 else:
                     ret_type = "void"
-                    stream.write(f"\n    pub inline fn {method['name']}({', '.join(args_string)}) {ret_type} {{\n")
+                    method_name = underscore_to_function(method['name'])
+                    stream.write(f"\n    pub inline fn {method_name}({', '.join(args_string)}) {ret_type} {{\n")
 
                     for line in method_lines:
                         stream.write(line)

@@ -223,17 +223,17 @@ pub const SurfaceConfigurationExtras = extern struct {
 pub const LogCallback = fn (LogLevel, [*:0]const u8, ?*anyopaque) callconv(.C) void;
 
 // Global
-pub inline fn generate_report(instance: Instance, report: *GlobalReport) void {
+pub inline fn generateReport(instance: Instance, report: *GlobalReport) void {
     c.wgpuGenerateReport(@ptrCast(instance), @ptrCast(report));
 }
 
 // Instance
-pub inline fn enumerate_adapters(self: *@This(), options: ?[*]const InstanceEnumerateAdapterOptions, adapters: *Adapter) usize {
+pub inline fn enumerateAdapters(self: *@This(), options: ?[*]const InstanceEnumerateAdapterOptions, adapters: *Adapter) usize {
     return c.wgpuInstanceEnumerateAdapters(@ptrCast(self), @ptrCast(options), @ptrCast(adapters));
 }
 
 // Queue
-pub inline fn submit_for_index(self: *@This(), commands: []CommandBuffer) u64 {
+pub inline fn submitForIndex(self: *@This(), commands: []CommandBuffer) u64 {
     return c.wgpuQueueSubmitForIndex(@ptrCast(self), commands.len, @ptrCast(commands.ptr));
 }
 
@@ -243,61 +243,61 @@ pub inline fn poll(self: *@This(), wait: bool, wrapped_submission_index: ?*const
 }
 
 // Global
-pub inline fn set_log_callback(callback: LogCallback, userdata: ?*anyopaque) void {
+pub inline fn setLogCallback(callback: LogCallback, userdata: ?*anyopaque) void {
     c.wgpuSetLogCallback(@ptrCast(&callback), @ptrCast(userdata));
 }
 
 // Global
-pub inline fn set_log_level(level: LogLevel) void {
+pub inline fn setLogLevel(level: LogLevel) void {
     return c.wgpuSetLogLevel(@bitCast(level));
 }
 
 // Global
-pub inline fn get_version() u32 {
+pub inline fn getVersion() u32 {
     return c.wgpuGetVersion();
 }
 
 // RenderPassEncoder
-pub inline fn set_push_constants(self: *@This(), stages: ShaderStageFlags, offset: u32, size_bytes: u32, datat: *const anyopaque) void {
+pub inline fn setPushConstants(self: *@This(), stages: ShaderStageFlags, offset: u32, size_bytes: u32, datat: *const anyopaque) void {
     c.wgpuRenderPassEncoderSetPushConstants(@ptrCast(self), @bitCast(stages), offset, size_bytes, @ptrCast(data));
 }
 
 // RenderPassEncoder
-pub inline fn multi_draw_indirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
+pub inline fn multiDrawIndirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirect(@ptrCast(self), @ptrCast(buffer), offset, count);
 }
 
 // RenderPassEncoder
-pub inline fn multi_draw_indexed_indirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
+pub inline fn multiDrawIndexedIndirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndexedIndirect(@ptrCast(self), @ptrCast(buffer), offset, count);
 }
 
 // RenderPassEncoder
-pub inline fn multi_draw_indirect_count(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
+pub inline fn multiDrawIndirectCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(this), @ptrCast(buffer), offset, @otrCast(count_buffer), count_buffer_offset, max_count);
 }
 
 // RenderPassEncoder
-pub inline fn multi_draw_indirect_indexed_count(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
+pub inline fn multiDrawIndirectIndexedCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(this), @ptrCast(buffer), offset, @otrCast(count_buffer), count_buffer_offset, max_count);
 }
 
 // ComputePassEncoder
-pub inline fn begin_pipeline_statistics_query(self: *@This(), query_set: QuerySet, query_index: u32) void {
+pub inline fn beginPipelineStatisticsQuery(self: *@This(), query_set: QuerySet, query_index: u32) void {
     c.wgpuComputePassEncoderBeginPipelineStatisticsQuery(@ptrCast(self), @ptrCast(query_set), query_index);
 }
 
 // ComputePassEncoder
-pub inline fn end_pipeline_statistics_query(self: *@This()) void {
+pub inline fn endPipelineStatisticsQuery(self: *@This()) void {
     c.wgpuComputePassEncoderEndPipelineStatisticsQuery(@ptrCast(self));
 }
 
 // RenderPassEncoder
-pub inline fn begin_pipeline_statistics_query(self: *@This(), query_set: QuerySet, query_index: u32) void {
+pub inline fn beginPipelineStatisticsQuery(self: *@This(), query_set: QuerySet, query_index: u32) void {
     c.wgpuComputePassEncoderBeginPipelineStatisticsQuery(@ptrCast(self), @ptrCast(query_set), query_index);
 }
 
 // RenderPassEncoder
-pub inline fn end_pipeline_statistics_query(self: *@This()) void {
+pub inline fn endPipelineStatisticsQuery(self: *@This()) void {
     c.wgpuComputePassEncoderEndPipelineStatisticsQuery(@ptrCast(self));
 }
