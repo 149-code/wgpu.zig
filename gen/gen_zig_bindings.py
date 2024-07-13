@@ -113,6 +113,7 @@ with open("gen/webgpu.zig", "w") as stream:
     stream.write("""const std = @import("std");
 const c = @cImport({
     @cInclude("webgpu.h");
+    @cInclude("wgpu.h");
 });
 
 """)

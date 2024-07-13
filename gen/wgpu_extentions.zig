@@ -1,7 +1,3 @@
-const c = @cImport({
-    @cInclude("wgpu.h");
-});
-
 pub const NativeSType = enum(u32) {
     device_extras = 0x0003001,
     required_limits_extras = 0x0003002,
@@ -95,8 +91,8 @@ pub const WGPUNativeQueryType = enum(u32) {
 
 pub const InstanceExtras = extern struct {
     chain: ChainedStruct,
-    backends: InstanceBackendFlags,
-    flags: InstanceFlags,
+    backends: u32,
+    flags: InstanceFlag,
     dx12_shader_compiler: Dx12Compiler,
     gles3_minor_version: Gles3MinorVersion,
     dxil_path: [*:0]const u8,
@@ -120,11 +116,11 @@ pub const RequiredLimitsExtras = extern struct {
 
 pub const SupportedLimitsExtras = extern struct {
     chain: ChainedStructOut,
-    limits: NativeLiimts,
+    limits: NativeLimits,
 };
 
 pub const PushConstantRange = extern struct {
-    stages: ShaderStageFlags,
+    stages: u32,
     start: u32,
     end: u32,
 };
@@ -137,7 +133,7 @@ pub const PipelineLayoutExtras = extern struct {
 
 pub const WrappedSubmissionIndex = extern struct {
     queue: Queue,
-    submissionIndex: SubmissionIndex,
+    submissionIndex: u64,
 };
 
 pub const ShaderDefine = extern struct {
@@ -191,7 +187,7 @@ pub const GlobalReport = extern struct {
 
 pub const InstanceEnumerateAdapterOptions = extern struct {
     nextInChain: *const ChainedStruct,
-    backends: InstanceBackendFlags,
+    backends: u32,
 };
 
 pub const BindGroupEntryExtras = extern struct {
@@ -239,7 +235,7 @@ pub inline fn submitForIndex(self: *@This(), commands: []CommandBuffer) u64 {
 
 // Device
 pub inline fn poll(self: *@This(), wait: bool, wrapped_submission_index: ?*const WrappedSubmissionIndex) bool {
-    return c.wgpuDevicePoll(@ptrCast(self), @boolToInt(wait), @ptrCast(wrapped_submission_index)) != 0;
+    return c.wgpuDevicePoll(@ptrCast(self), @intFromBool(wait), @ptrCast(wrapped_submission_index)) != 0;
 }
 
 // Global
@@ -258,7 +254,7 @@ pub inline fn getVersion() u32 {
 }
 
 // RenderPassEncoder
-pub inline fn setPushConstants(self: *@This(), stages: ShaderStageFlags, offset: u32, size_bytes: u32, datat: *const anyopaque) void {
+pub inline fn setPushConstants(self: *@This(), stages: u32, offset: u32, size_bytes: u32, data: *const anyopaque) void {
     c.wgpuRenderPassEncoderSetPushConstants(@ptrCast(self), @bitCast(stages), offset, size_bytes, @ptrCast(data));
 }
 
@@ -274,12 +270,12 @@ pub inline fn multiDrawIndexedIndirect(self: *@This(), buffer: Buffer, offset: u
 
 // RenderPassEncoder
 pub inline fn multiDrawIndirectCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
-    c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(this), @ptrCast(buffer), offset, @otrCast(count_buffer), count_buffer_offset, max_count);
+    c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(self), @ptrCast(buffer), offset, @ptrCast(count_buffer), count_buffer_offset, max_count);
 }
 
 // RenderPassEncoder
 pub inline fn multiDrawIndirectIndexedCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
-    c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(this), @ptrCast(buffer), offset, @otrCast(count_buffer), count_buffer_offset, max_count);
+    c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(self), @ptrCast(buffer), offset, @ptrCast(count_buffer), count_buffer_offset, max_count);
 }
 
 // ComputePassEncoder
