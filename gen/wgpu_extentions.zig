@@ -91,7 +91,7 @@ pub const PipelineStatisticName = enum(u32) {
 
 pub const WGPUNativeQueryType = enum(u32) {
     pipeline_statistics = 0x00030000,
-}
+};
 
 pub const InstanceExtras = extern struct {
     chain: ChainedStruct,
