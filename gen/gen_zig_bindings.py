@@ -346,6 +346,10 @@ const ChainedStructOut = extern struct {
                     stream.write(f"        c.{c_function_name}({', '.join(c_exprs)});\n")
                 stream.write("    }\n")
 
+        stream.write("\n    pub inline fn release(this: *@This()) void {\n")
+        stream.write(f"        c.wgpu{obj_name}Release(@ptrCast(this));\n")
+        stream.write("    }\n")
+
         stream.write("};\n\n")
 
     for function in webgpu_cfg["functions"]:
