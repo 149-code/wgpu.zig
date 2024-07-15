@@ -150,10 +150,13 @@ const c = @cImport({
 
         stream.write(f"pub const {bitflag_name} = packed struct {{\n")
 
+        count = 0
         for i, entry in enumerate(bitflag["entries"][1:]):
-            stream.write(f"    {sanitize_name(entry['name'])}: u1 = 0,\n")
+            if entry.get("value_combination", "") == "":
+                stream.write(f"    {sanitize_name(entry['name'])}: u1 = 0,\n")
+                count += 1
 
-        stream.write(f"    _padding: u{32 - len(bitflag['entries'][1:])} = 0,\n")
+        stream.write(f"    _padding: u{32 - count} = 0,\n")
 
         stream.write("};\n\n")
 
