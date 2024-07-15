@@ -167,7 +167,7 @@ const c = @cImport({
         stream.write(f"const {function_type_name} = *const fn ({', '.join(args_string)}) callconv(.C) void;\n\n")
 
     stream.write("""const ChainedStruct = extern struct {
-    next: ?*ChainedStruct = null,
+    next: ?*const ChainedStruct = null,
     s_type: SType,
 };
 
