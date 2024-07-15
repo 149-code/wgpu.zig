@@ -166,12 +166,12 @@ const c = @cImport({
 
         stream.write(f"const {function_type_name} = *const fn ({', '.join(args_string)}) callconv(.C) void;\n\n")
 
-    stream.write("""const ChainedStruct = extern struct {
+    stream.write("""pub const ChainedStruct = extern struct {
     next: ?*const ChainedStruct = null,
     s_type: SType,
 };
 
-const ChainedStructOut = extern struct {
+pub const ChainedStructOut = extern struct {
     next: ?*ChainedStructOut = null,
     s_type: SType,
 };
@@ -185,7 +185,7 @@ const ChainedStructOut = extern struct {
 
         match struct["type"]:
             case "base_in":
-                stream.write("    next_in_chain: ?*ChainedStruct = null,\n")
+                stream.write("    next_in_chain: ?*const ChainedStruct = null,\n")
             case "extension_in":
                 stream.write("    chain: ChainedStruct,\n")
             case "base_out":
