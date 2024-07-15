@@ -206,7 +206,7 @@ pub const ChainedStructOut = extern struct {
                 words.append("count")
 
                 stream.write(f"    {'_'.join(words)}: usize = 0,\n")
-                stream.write(f"    {member['name']}: ?*const {translate_typename_struct(m.group(1))} = null,\n")
+                stream.write(f"    {member['name']}: ?[*]const {translate_typename_struct(m.group(1))} = null,\n")
             elif member["type"] == "string":
                 stream.write(f"    {member['name']}: [*:0]const u8 = \"\",\n")
             else:
