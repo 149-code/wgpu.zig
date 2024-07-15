@@ -168,12 +168,12 @@ const c = @cImport({
 
     stream.write("""const ChainedStruct = extern struct {
     next: ?*ChainedStruct = null,
-    sType: SType,
+    s_type: SType,
 };
 
 const ChainedStructOut = extern struct {
     next: ?*ChainedStructOut = null,
-    sType: SType,
+    s_type: SType,
 };
 
 """)
