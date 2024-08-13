@@ -26,7 +26,7 @@ for chunk in extension_chunks:
         else:
             object_index = -1
             for index, val in enumerate(webgpu_lines):
-                if val.startswith(f"pub const {object_name}Handle "):
+                if val.startswith(f"pub const {object_name}Impl "):
                     object_index = index
 
             if object_index == -1:

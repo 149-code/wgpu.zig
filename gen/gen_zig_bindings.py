@@ -234,8 +234,8 @@ pub const ChainedStructOut = extern struct {
     for obj in webgpu_cfg["objects"]:
         obj_name = underscore_to_type(obj["name"])
 
-        stream.write(f"pub const {obj_name} = *{obj_name}Handle;\n")
-        stream.write(f"pub const {obj_name}Handle = opaque {{\n")
+        stream.write(f"pub const {obj_name} = *{obj_name}Impl;\n")
+        stream.write(f"pub const {obj_name}Impl = opaque {{\n")
 
         for method in obj["methods"]:
             c_function_name = underscore_to_function("wgpu_" + obj["name"] + '_' + method["name"])
