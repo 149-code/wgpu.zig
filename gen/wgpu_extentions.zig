@@ -1,15 +1,14 @@
-pub const NativeSType = enum(u32) {
-    device_extras = 0x0003001,
-    required_limits_extras = 0x0003002,
-    pipeline_layout_extras = 0x0003003,
-    shader_module_glsl_descriptor = 0x0003004,
-    supported_limits_extras = 0x0003005,
-    instance_extras = 0x0003006,
-    bind_group_entry_extras = 0x0003007,
-    bind_group_layout_entry_extras = 0x0003008,
-    query_set_description_extras = 0x0003009,
-    surface_configuration_extras = 0x000300A,
-};
+// Merge SType
+device_extras = 0x0003001,
+required_limits_extras = 0x0003002,
+pipeline_layout_extras = 0x0003003,
+shader_module_glsl_descriptor = 0x0003004,
+supported_limits_extras = 0x0003005,
+instance_extras = 0x0003006,
+bind_group_entry_extras = 0x0003007,
+bind_group_layout_entry_extras = 0x0003008,
+query_set_description_extras = 0x0003009,
+surface_configuration_extras = 0x000300A,
 
 pub const NativeFeature = enum(u32) {
     push_constants = 0x00030001,
@@ -54,14 +53,14 @@ pub const InstanceBackend = packed struct {
     dx11: u1,
     dx12: u1,
     browser_web_gpu: u1,
-    padding: u26,
+    padding: u26 = 0,
 };
 
 pub const InstanceFlag = packed struct {
     debug: u1,
     validation: u1,
     discard_hal_labels: u1,
-    padding: u29,
+    padding: u29 = 0,
 };
 
 pub const Dx12Compiler = enum(u32) {
@@ -91,12 +90,12 @@ pub const WGPUNativeQueryType = enum(u32) {
 
 pub const InstanceExtras = extern struct {
     chain: ChainedStruct,
-    backends: u32,
+    backends: BackendType,
     flags: InstanceFlag,
     dx12_shader_compiler: Dx12Compiler,
     gles3_minor_version: Gles3MinorVersion,
-    dxil_path: [*:0]const u8,
-    dxc_path: [*:0]const u8,
+    dxil_path: [*:0]const u8 = "",
+    dxc_path: [*:0]const u8 = "",
 };
 
 pub const DeviceExtras = extern struct {
@@ -223,17 +222,17 @@ pub inline fn generateReport(instance: Instance, report: *GlobalReport) void {
     c.wgpuGenerateReport(@ptrCast(instance), @ptrCast(report));
 }
 
-// Instance
+// Append Instance
 pub inline fn enumerateAdapters(self: *@This(), options: ?[*]const InstanceEnumerateAdapterOptions, adapters: *Adapter) usize {
     return c.wgpuInstanceEnumerateAdapters(@ptrCast(self), @ptrCast(options), @ptrCast(adapters));
 }
 
-// Queue
+// Append Queue
 pub inline fn submitForIndex(self: *@This(), commands: []CommandBuffer) u64 {
     return c.wgpuQueueSubmitForIndex(@ptrCast(self), commands.len, @ptrCast(commands.ptr));
 }
 
-// Device
+// Append Device
 pub inline fn poll(self: *@This(), wait: bool, wrapped_submission_index: ?*const WrappedSubmissionIndex) bool {
     return c.wgpuDevicePoll(@ptrCast(self), @intFromBool(wait), @ptrCast(wrapped_submission_index)) != 0;
 }
@@ -253,47 +252,47 @@ pub inline fn getVersion() u32 {
     return c.wgpuGetVersion();
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn setPushConstants(self: *@This(), stages: u32, offset: u32, size_bytes: u32, data: *const anyopaque) void {
     c.wgpuRenderPassEncoderSetPushConstants(@ptrCast(self), @bitCast(stages), offset, size_bytes, @ptrCast(data));
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn multiDrawIndirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirect(@ptrCast(self), @ptrCast(buffer), offset, count);
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn multiDrawIndexedIndirect(self: *@This(), buffer: Buffer, offset: u64, count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndexedIndirect(@ptrCast(self), @ptrCast(buffer), offset, count);
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn multiDrawIndirectCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(self), @ptrCast(buffer), offset, @ptrCast(count_buffer), count_buffer_offset, max_count);
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn multiDrawIndirectIndexedCount(self: *@This(), buffer: Buffer, offset: u64, count_buffer: Buffer, count_buffer_offset: u64, max_count: u32) void {
     c.wgpuRenderPassEncoderMultiDrawIndirectCount(@ptrCast(self), @ptrCast(buffer), offset, @ptrCast(count_buffer), count_buffer_offset, max_count);
 }
 
-// ComputePassEncoder
+// Append ComputePassEncoder
 pub inline fn beginPipelineStatisticsQuery(self: *@This(), query_set: QuerySet, query_index: u32) void {
     c.wgpuComputePassEncoderBeginPipelineStatisticsQuery(@ptrCast(self), @ptrCast(query_set), query_index);
 }
 
-// ComputePassEncoder
+// Append ComputePassEncoder
 pub inline fn endPipelineStatisticsQuery(self: *@This()) void {
     c.wgpuComputePassEncoderEndPipelineStatisticsQuery(@ptrCast(self));
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn beginPipelineStatisticsQuery(self: *@This(), query_set: QuerySet, query_index: u32) void {
     c.wgpuComputePassEncoderBeginPipelineStatisticsQuery(@ptrCast(self), @ptrCast(query_set), query_index);
 }
 
-// RenderPassEncoder
+// Append RenderPassEncoder
 pub inline fn endPipelineStatisticsQuery(self: *@This()) void {
     c.wgpuComputePassEncoderEndPipelineStatisticsQuery(@ptrCast(self));
 }

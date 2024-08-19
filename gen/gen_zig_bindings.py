@@ -137,11 +137,11 @@ const c = @cImport({
 
         stream.write(f"pub const {enum_name} = enum(u32) {{\n")
 
-        for entry in enum["entries"]:
+        for idx, entry in enumerate(enum["entries"]):
             if entry['name'][0].isnumeric():
-                stream.write(f"    _{sanitize_name(entry['name'])},\n")
+                stream.write(f"    _{sanitize_name(entry['name'])} = {idx},\n")
             else:
-                stream.write(f"    {sanitize_name(entry['name'])},\n")
+                stream.write(f"    {sanitize_name(entry['name'])} = {idx},\n")
 
         stream.write("};\n\n")
 
@@ -327,8 +327,10 @@ pub const ChainedStructOut = extern struct {
 
                     if method["returns"]["type"].startswith("object"):
                         stream.write(f"        return @ptrCast({ret_expr});\n")
-                    elif method["returns"]["type"].startswith("bitflag") or method["returns"]["type"].startswith("enum"):
+                    elif method["returns"]["type"].startswith("bitflag"):
                         stream.write(f"        return @bitCast({ret_expr});\n")
+                    elif method["returns"]["type"].startswith("enum"):
+                        stream.write(f"        return @enumFromInt({ret_expr});\n")
                     elif method["returns"]["type"] in ["usize", "uint64", "uint32"]:
                         stream.write(f"        return @bitCast({ret_expr});\n")
                     elif method["returns"]["type"] == "bool":

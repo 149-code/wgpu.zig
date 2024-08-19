@@ -17,16 +17,32 @@ for chunk in extension_chunks:
 
     elif chunk.startswith("//"):
         lines = chunk.split("\n")
-        object_name = lines[0][3:]
+        cmd = lines[0].replace("//", "").strip()
 
-        if object_name == "Global":
+        if cmd == "Global":
             webgpu_lines.append("")
             for line in chunk.split("\n")[1:]:
                 webgpu_lines.append(line)
-        else:
+        elif cmd.startswith("Append"):
+            object_name = cmd[6:].strip()
+
             object_index = -1
             for index, val in enumerate(webgpu_lines):
                 if val.startswith(f"pub const {object_name}Impl "):
+                    object_index = index
+
+            if object_index == -1:
+                raise Exception(f"Unknown object {object_name}")
+
+            for index, line in enumerate(chunk.split("\n")[1:] + [""]):
+                webgpu_lines.insert(object_index + index + 1, "    " + line)
+
+        elif cmd.startswith("Merge"):
+            object_name = cmd[5:].strip()
+
+            object_index = -1
+            for index, val in enumerate(webgpu_lines):
+                if val.startswith(f"pub const {object_name}"):
                     object_index = index
 
             if object_index == -1:

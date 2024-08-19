@@ -15,466 +15,466 @@ pub const whole_map_size = std.math.maxInt(usize);
 pub const whole_size = std.math.maxInt(u64);
 
 pub const RequestAdapterStatus = enum(u32) {
-    success,
-    unavailable,
-    err,
-    unknown,
+    success = 0,
+    unavailable = 1,
+    err = 2,
+    unknown = 3,
 };
 
 pub const AdapterType = enum(u32) {
-    discrete_GPU,
-    integrated_GPU,
-    CPU,
-    unknown,
+    discrete_GPU = 0,
+    integrated_GPU = 1,
+    CPU = 2,
+    unknown = 3,
 };
 
 pub const AddressMode = enum(u32) {
-    repeat,
-    mirror_repeat,
-    clamp_to_edge,
+    repeat = 0,
+    mirror_repeat = 1,
+    clamp_to_edge = 2,
 };
 
 pub const BackendType = enum(u32) {
-    undef,
-    nil,
-    WebGPU,
-    D3D11,
-    D3D12,
-    metal,
-    vulkan,
-    openGL,
-    openGLES,
+    undef = 0,
+    nil = 1,
+    WebGPU = 2,
+    D3D11 = 3,
+    D3D12 = 4,
+    metal = 5,
+    vulkan = 6,
+    openGL = 7,
+    openGLES = 8,
 };
 
 pub const BufferBindingType = enum(u32) {
-    undef,
-    uniform,
-    storage,
-    read_only_storage,
+    undef = 0,
+    uniform = 1,
+    storage = 2,
+    read_only_storage = 3,
 };
 
 pub const SamplerBindingType = enum(u32) {
-    undef,
-    filtering,
-    non_filtering,
-    comparison,
+    undef = 0,
+    filtering = 1,
+    non_filtering = 2,
+    comparison = 3,
 };
 
 pub const TextureSampleType = enum(u32) {
-    undef,
-    float,
-    unfilterable_float,
-    depth,
-    sint,
-    uint,
+    undef = 0,
+    float = 1,
+    unfilterable_float = 2,
+    depth = 3,
+    sint = 4,
+    uint = 5,
 };
 
 pub const StorageTextureAccess = enum(u32) {
-    undef,
-    write_only,
-    read_only,
-    read_write,
+    undef = 0,
+    write_only = 1,
+    read_only = 2,
+    read_write = 3,
 };
 
 pub const BlendFactor = enum(u32) {
-    zero,
-    one,
-    src,
-    one_minus_src,
-    src_alpha,
-    one_minus_src_alpha,
-    dst,
-    one_minus_dst,
-    dst_alpha,
-    one_minus_dst_alpha,
-    src_alpha_saturated,
-    constant,
-    one_minus_constant,
+    zero = 0,
+    one = 1,
+    src = 2,
+    one_minus_src = 3,
+    src_alpha = 4,
+    one_minus_src_alpha = 5,
+    dst = 6,
+    one_minus_dst = 7,
+    dst_alpha = 8,
+    one_minus_dst_alpha = 9,
+    src_alpha_saturated = 10,
+    constant = 11,
+    one_minus_constant = 12,
 };
 
 pub const BlendOperation = enum(u32) {
-    add,
-    subtract,
-    reverse_subtract,
-    min,
-    max,
+    add = 0,
+    subtract = 1,
+    reverse_subtract = 2,
+    min = 3,
+    max = 4,
 };
 
 pub const BufferMapAsyncStatus = enum(u32) {
-    success,
-    validation_error,
-    unknown,
-    device_lost,
-    destroyed_before_callback,
-    unmapped_before_callback,
-    mapping_already_pending,
-    offset_out_of_range,
-    size_out_of_range,
+    success = 0,
+    validation_error = 1,
+    unknown = 2,
+    device_lost = 3,
+    destroyed_before_callback = 4,
+    unmapped_before_callback = 5,
+    mapping_already_pending = 6,
+    offset_out_of_range = 7,
+    size_out_of_range = 8,
 };
 
 pub const BufferMapState = enum(u32) {
-    unmapped,
-    pending,
-    mapped,
+    unmapped = 0,
+    pending = 1,
+    mapped = 2,
 };
 
 pub const CompareFunction = enum(u32) {
-    undef,
-    never,
-    less,
-    less_equal,
-    greater,
-    greater_equal,
-    equal,
-    not_equal,
-    always,
+    undef = 0,
+    never = 1,
+    less = 2,
+    less_equal = 3,
+    greater = 4,
+    greater_equal = 5,
+    equal = 6,
+    not_equal = 7,
+    always = 8,
 };
 
 pub const CompilationInfoRequestStatus = enum(u32) {
-    success,
-    err,
-    device_lost,
-    unknown,
+    success = 0,
+    err = 1,
+    device_lost = 2,
+    unknown = 3,
 };
 
 pub const CompilationMessageType = enum(u32) {
-    err,
-    warning,
-    info,
+    err = 0,
+    warning = 1,
+    info = 2,
 };
 
 pub const CompositeAlphaMode = enum(u32) {
-    auto,
-    opaq,
-    premultiplied,
-    unpremultiplied,
-    inherit,
+    auto = 0,
+    opaq = 1,
+    premultiplied = 2,
+    unpremultiplied = 3,
+    inherit = 4,
 };
 
 pub const CreatePipelineAsyncStatus = enum(u32) {
-    success,
-    validation_error,
-    internal_error,
-    device_lost,
-    device_destroyed,
-    unknown,
+    success = 0,
+    validation_error = 1,
+    internal_error = 2,
+    device_lost = 3,
+    device_destroyed = 4,
+    unknown = 5,
 };
 
 pub const CullMode = enum(u32) {
-    none,
-    front,
-    back,
+    none = 0,
+    front = 1,
+    back = 2,
 };
 
 pub const DeviceLostReason = enum(u32) {
-    undef,
-    destroyed,
+    undef = 0,
+    destroyed = 1,
 };
 
 pub const ErrorFilter = enum(u32) {
-    validation,
-    out_of_memory,
-    internal,
+    validation = 0,
+    out_of_memory = 1,
+    internal = 2,
 };
 
 pub const ErrorType = enum(u32) {
-    no_error,
-    validation,
-    out_of_memory,
-    internal,
-    unknown,
-    device_lost,
+    no_error = 0,
+    validation = 1,
+    out_of_memory = 2,
+    internal = 3,
+    unknown = 4,
+    device_lost = 5,
 };
 
 pub const FeatureName = enum(u32) {
-    undef,
-    depth_clip_control,
-    depth32_float_stencil8,
-    timestamp_query,
-    texture_compression_BC,
-    texture_compression_ETC2,
-    texture_compression_ASTC,
-    indirect_first_instance,
-    shader_f16,
-    RG11B10_ufloat_renderable,
-    BGRA8_unorm_storage,
-    float32_filterable,
+    undef = 0,
+    depth_clip_control = 1,
+    depth32_float_stencil8 = 2,
+    timestamp_query = 3,
+    texture_compression_BC = 4,
+    texture_compression_ETC2 = 5,
+    texture_compression_ASTC = 6,
+    indirect_first_instance = 7,
+    shader_f16 = 8,
+    RG11B10_ufloat_renderable = 9,
+    BGRA8_unorm_storage = 10,
+    float32_filterable = 11,
 };
 
 pub const FilterMode = enum(u32) {
-    nearest,
-    linear,
+    nearest = 0,
+    linear = 1,
 };
 
 pub const FrontFace = enum(u32) {
-    CCW,
-    CW,
+    CCW = 0,
+    CW = 1,
 };
 
 pub const IndexFormat = enum(u32) {
-    undef,
-    uint16,
-    uint32,
+    undef = 0,
+    uint16 = 1,
+    uint32 = 2,
 };
 
 pub const VertexStepMode = enum(u32) {
-    vertex,
-    instance,
-    vertex_buffer_not_used,
+    vertex = 0,
+    instance = 1,
+    vertex_buffer_not_used = 2,
 };
 
 pub const LoadOp = enum(u32) {
-    undef,
-    clear,
-    load,
+    undef = 0,
+    clear = 1,
+    load = 2,
 };
 
 pub const MipmapFilterMode = enum(u32) {
-    nearest,
-    linear,
+    nearest = 0,
+    linear = 1,
 };
 
 pub const StoreOp = enum(u32) {
-    undef,
-    store,
-    discard,
+    undef = 0,
+    store = 1,
+    discard = 2,
 };
 
 pub const PowerPreference = enum(u32) {
-    undef,
-    low_power,
-    high_performance,
+    undef = 0,
+    low_power = 1,
+    high_performance = 2,
 };
 
 pub const PresentMode = enum(u32) {
-    fifo,
-    fifo_relaxed,
-    immediate,
-    mailbox,
+    fifo = 0,
+    fifo_relaxed = 1,
+    immediate = 2,
+    mailbox = 3,
 };
 
 pub const PrimitiveTopology = enum(u32) {
-    point_list,
-    line_list,
-    line_strip,
-    triangle_list,
-    triangle_strip,
+    point_list = 0,
+    line_list = 1,
+    line_strip = 2,
+    triangle_list = 3,
+    triangle_strip = 4,
 };
 
 pub const QueryType = enum(u32) {
-    occlusion,
-    timestamp,
+    occlusion = 0,
+    timestamp = 1,
 };
 
 pub const QueueWorkDoneStatus = enum(u32) {
-    success,
-    err,
-    unknown,
-    device_lost,
+    success = 0,
+    err = 1,
+    unknown = 2,
+    device_lost = 3,
 };
 
 pub const RequestDeviceStatus = enum(u32) {
-    success,
-    err,
-    unknown,
+    success = 0,
+    err = 1,
+    unknown = 2,
 };
 
 pub const StencilOperation = enum(u32) {
-    keep,
-    zero,
-    replace,
-    invert,
-    increment_clamp,
-    decrement_clamp,
-    increment_wrap,
-    decrement_wrap,
+    keep = 0,
+    zero = 1,
+    replace = 2,
+    invert = 3,
+    increment_clamp = 4,
+    decrement_clamp = 5,
+    increment_wrap = 6,
+    decrement_wrap = 7,
 };
 
 pub const SType = enum(u32) {
-    invalid,
-    surface_descriptor_from_metal_layer,
-    surface_descriptor_from_windows_HWND,
-    surface_descriptor_from_xlib_window,
-    surface_descriptor_from_canvas_HTML_selector,
-    shader_module_SPIRV_descriptor,
-    shader_module_WGSL_descriptor,
-    primitive_depth_clip_control,
-    surface_descriptor_from_wayland_surface,
-    surface_descriptor_from_android_native_window,
-    surface_descriptor_from_xcb_window,
-    render_pass_descriptor_max_draw_count,
+    invalid = 0,
+    surface_descriptor_from_metal_layer = 1,
+    surface_descriptor_from_windows_HWND = 2,
+    surface_descriptor_from_xlib_window = 3,
+    surface_descriptor_from_canvas_HTML_selector = 4,
+    shader_module_SPIRV_descriptor = 5,
+    shader_module_WGSL_descriptor = 6,
+    primitive_depth_clip_control = 7,
+    surface_descriptor_from_wayland_surface = 8,
+    surface_descriptor_from_android_native_window = 9,
+    surface_descriptor_from_xcb_window = 10,
+    render_pass_descriptor_max_draw_count = 11,
 };
 
 pub const SurfaceGetCurrentTextureStatus = enum(u32) {
-    success,
-    timeout,
-    outdated,
-    lost,
-    out_of_memory,
-    device_lost,
+    success = 0,
+    timeout = 1,
+    outdated = 2,
+    lost = 3,
+    out_of_memory = 4,
+    device_lost = 5,
 };
 
 pub const TextureAspect = enum(u32) {
-    all,
-    stencil_only,
-    depth_only,
+    all = 0,
+    stencil_only = 1,
+    depth_only = 2,
 };
 
 pub const TextureDimension = enum(u32) {
-    _1D,
-    _2D,
-    _3D,
+    _1D = 0,
+    _2D = 1,
+    _3D = 2,
 };
 
 pub const TextureFormat = enum(u32) {
-    undef,
-    R8_unorm,
-    R8_snorm,
-    R8_uint,
-    R8_sint,
-    R16_uint,
-    R16_sint,
-    R16_float,
-    RG8_unorm,
-    RG8_snorm,
-    RG8_uint,
-    RG8_sint,
-    R32_float,
-    R32_uint,
-    R32_sint,
-    RG16_uint,
-    RG16_sint,
-    RG16_float,
-    RGBA8_unorm,
-    RGBA8_unorm_srgb,
-    RGBA8_snorm,
-    RGBA8_uint,
-    RGBA8_sint,
-    BGRA8_unorm,
-    BGRA8_unorm_srgb,
-    RGB10_A2_uint,
-    RGB10_A2_unorm,
-    RG11_B10_ufloat,
-    RGB9_E5_ufloat,
-    RG32_float,
-    RG32_uint,
-    RG32_sint,
-    RGBA16_uint,
-    RGBA16_sint,
-    RGBA16_float,
-    RGBA32_float,
-    RGBA32_uint,
-    RGBA32_sint,
-    stencil8,
-    depth16_unorm,
-    depth24_plus,
-    depth24_plus_stencil8,
-    depth32_float,
-    depth32_float_stencil8,
-    BC1_RGBA_unorm,
-    BC1_RGBA_unorm_srgb,
-    BC2_RGBA_unorm,
-    BC2_RGBA_unorm_srgb,
-    BC3_RGBA_unorm,
-    BC3_RGBA_unorm_srgb,
-    BC4_R_unorm,
-    BC4_R_snorm,
-    BC5_RG_unorm,
-    BC5_RG_snorm,
-    BC6H_RGB_ufloat,
-    BC6H_RGB_float,
-    BC7_RGBA_unorm,
-    BC7_RGBA_unorm_srgb,
-    ETC2_RGB8_unorm,
-    ETC2_RGB8_unorm_srgb,
-    ETC2_RGB8A1_unorm,
-    ETC2_RGB8A1_unorm_srgb,
-    ETC2_RGBA8_unorm,
-    ETC2_RGBA8_unorm_srgb,
-    EAC_R11_unorm,
-    EAC_R11_snorm,
-    EAC_RG11_unorm,
-    EAC_RG11_snorm,
-    ASTC_4x4_unorm,
-    ASTC_4x4_unorm_srgb,
-    ASTC_5x4_unorm,
-    ASTC_5x4_unorm_srgb,
-    ASTC_5x5_unorm,
-    ASTC_5x5_unorm_srgb,
-    ASTC_6x5_unorm,
-    ASTC_6x5_unorm_srgb,
-    ASTC_6x6_unorm,
-    ASTC_6x6_unorm_srgb,
-    ASTC_8x5_unorm,
-    ASTC_8x5_unorm_srgb,
-    ASTC_8x6_unorm,
-    ASTC_8x6_unorm_srgb,
-    ASTC_8x8_unorm,
-    ASTC_8x8_unorm_srgb,
-    ASTC_10x5_unorm,
-    ASTC_10x5_unorm_srgb,
-    ASTC_10x6_unorm,
-    ASTC_10x6_unorm_srgb,
-    ASTC_10x8_unorm,
-    ASTC_10x8_unorm_srgb,
-    ASTC_10x10_unorm,
-    ASTC_10x10_unorm_srgb,
-    ASTC_12x10_unorm,
-    ASTC_12x10_unorm_srgb,
-    ASTC_12x12_unorm,
-    ASTC_12x12_unorm_srgb,
+    undef = 0,
+    R8_unorm = 1,
+    R8_snorm = 2,
+    R8_uint = 3,
+    R8_sint = 4,
+    R16_uint = 5,
+    R16_sint = 6,
+    R16_float = 7,
+    RG8_unorm = 8,
+    RG8_snorm = 9,
+    RG8_uint = 10,
+    RG8_sint = 11,
+    R32_float = 12,
+    R32_uint = 13,
+    R32_sint = 14,
+    RG16_uint = 15,
+    RG16_sint = 16,
+    RG16_float = 17,
+    RGBA8_unorm = 18,
+    RGBA8_unorm_srgb = 19,
+    RGBA8_snorm = 20,
+    RGBA8_uint = 21,
+    RGBA8_sint = 22,
+    BGRA8_unorm = 23,
+    BGRA8_unorm_srgb = 24,
+    RGB10_A2_uint = 25,
+    RGB10_A2_unorm = 26,
+    RG11_B10_ufloat = 27,
+    RGB9_E5_ufloat = 28,
+    RG32_float = 29,
+    RG32_uint = 30,
+    RG32_sint = 31,
+    RGBA16_uint = 32,
+    RGBA16_sint = 33,
+    RGBA16_float = 34,
+    RGBA32_float = 35,
+    RGBA32_uint = 36,
+    RGBA32_sint = 37,
+    stencil8 = 38,
+    depth16_unorm = 39,
+    depth24_plus = 40,
+    depth24_plus_stencil8 = 41,
+    depth32_float = 42,
+    depth32_float_stencil8 = 43,
+    BC1_RGBA_unorm = 44,
+    BC1_RGBA_unorm_srgb = 45,
+    BC2_RGBA_unorm = 46,
+    BC2_RGBA_unorm_srgb = 47,
+    BC3_RGBA_unorm = 48,
+    BC3_RGBA_unorm_srgb = 49,
+    BC4_R_unorm = 50,
+    BC4_R_snorm = 51,
+    BC5_RG_unorm = 52,
+    BC5_RG_snorm = 53,
+    BC6H_RGB_ufloat = 54,
+    BC6H_RGB_float = 55,
+    BC7_RGBA_unorm = 56,
+    BC7_RGBA_unorm_srgb = 57,
+    ETC2_RGB8_unorm = 58,
+    ETC2_RGB8_unorm_srgb = 59,
+    ETC2_RGB8A1_unorm = 60,
+    ETC2_RGB8A1_unorm_srgb = 61,
+    ETC2_RGBA8_unorm = 62,
+    ETC2_RGBA8_unorm_srgb = 63,
+    EAC_R11_unorm = 64,
+    EAC_R11_snorm = 65,
+    EAC_RG11_unorm = 66,
+    EAC_RG11_snorm = 67,
+    ASTC_4x4_unorm = 68,
+    ASTC_4x4_unorm_srgb = 69,
+    ASTC_5x4_unorm = 70,
+    ASTC_5x4_unorm_srgb = 71,
+    ASTC_5x5_unorm = 72,
+    ASTC_5x5_unorm_srgb = 73,
+    ASTC_6x5_unorm = 74,
+    ASTC_6x5_unorm_srgb = 75,
+    ASTC_6x6_unorm = 76,
+    ASTC_6x6_unorm_srgb = 77,
+    ASTC_8x5_unorm = 78,
+    ASTC_8x5_unorm_srgb = 79,
+    ASTC_8x6_unorm = 80,
+    ASTC_8x6_unorm_srgb = 81,
+    ASTC_8x8_unorm = 82,
+    ASTC_8x8_unorm_srgb = 83,
+    ASTC_10x5_unorm = 84,
+    ASTC_10x5_unorm_srgb = 85,
+    ASTC_10x6_unorm = 86,
+    ASTC_10x6_unorm_srgb = 87,
+    ASTC_10x8_unorm = 88,
+    ASTC_10x8_unorm_srgb = 89,
+    ASTC_10x10_unorm = 90,
+    ASTC_10x10_unorm_srgb = 91,
+    ASTC_12x10_unorm = 92,
+    ASTC_12x10_unorm_srgb = 93,
+    ASTC_12x12_unorm = 94,
+    ASTC_12x12_unorm_srgb = 95,
 };
 
 pub const TextureViewDimension = enum(u32) {
-    undef,
-    _1D,
-    _2D,
-    _2D_array,
-    cube,
-    cube_array,
-    _3D,
+    undef = 0,
+    _1D = 1,
+    _2D = 2,
+    _2D_array = 3,
+    cube = 4,
+    cube_array = 5,
+    _3D = 6,
 };
 
 pub const VertexFormat = enum(u32) {
-    undef,
-    uint8x2,
-    uint8x4,
-    sint8x2,
-    sint8x4,
-    unorm8x2,
-    unorm8x4,
-    snorm8x2,
-    snorm8x4,
-    uint16x2,
-    uint16x4,
-    sint16x2,
-    sint16x4,
-    unorm16x2,
-    unorm16x4,
-    snorm16x2,
-    snorm16x4,
-    float16x2,
-    float16x4,
-    float32,
-    float32x2,
-    float32x3,
-    float32x4,
-    uint32,
-    uint32x2,
-    uint32x3,
-    uint32x4,
-    sint32,
-    sint32x2,
-    sint32x3,
-    sint32x4,
+    undef = 0,
+    uint8x2 = 1,
+    uint8x4 = 2,
+    sint8x2 = 3,
+    sint8x4 = 4,
+    unorm8x2 = 5,
+    unorm8x4 = 6,
+    snorm8x2 = 7,
+    snorm8x4 = 8,
+    uint16x2 = 9,
+    uint16x4 = 10,
+    sint16x2 = 11,
+    sint16x4 = 12,
+    unorm16x2 = 13,
+    unorm16x4 = 14,
+    snorm16x2 = 15,
+    snorm16x4 = 16,
+    float16x2 = 17,
+    float16x4 = 18,
+    float32 = 19,
+    float32x2 = 20,
+    float32x3 = 21,
+    float32x4 = 22,
+    uint32 = 23,
+    uint32x2 = 24,
+    uint32x3 = 25,
+    uint32x4 = 26,
+    sint32 = 27,
+    sint32x2 = 28,
+    sint32x3 = 29,
+    sint32x4 = 30,
 };
 
 pub const WgslFeatureName = enum(u32) {
-    undef,
-    readonly_and_readwrite_storage_textures,
-    packed4x8_integer_dot_product,
-    unrestricted_pointer_parameters,
-    pointer_composite_access,
+    undef = 0,
+    readonly_and_readwrite_storage_textures = 1,
+    packed4x8_integer_dot_product = 2,
+    unrestricted_pointer_parameters = 3,
+    pointer_composite_access = 4,
 };
 
 pub const BufferUsage = packed struct {
@@ -1198,7 +1198,7 @@ pub const BufferImpl = opaque {
     }
 
     pub inline fn getMapState(self: *@This()) BufferMapState {
-        return @bitCast(c.wgpuBufferGetMapState(@ptrCast(self)));
+        return @enumFromInt(c.wgpuBufferGetMapState(@ptrCast(self)));
     }
 
     pub inline fn unmap(self: *@This()) void {
@@ -1497,7 +1497,7 @@ pub const QuerySetImpl = opaque {
     }
 
     pub inline fn getType(self: *@This()) QueryType {
-        return @bitCast(c.wgpuQuerySetGetType(@ptrCast(self)));
+        return @enumFromInt(c.wgpuQuerySetGetType(@ptrCast(self)));
     }
 
     pub inline fn getCount(self: *@This()) u32 {
@@ -1763,7 +1763,7 @@ pub const SurfaceImpl = opaque {
     }
 
     pub inline fn getPreferredFormat(self: *@This(), adapter: Adapter) TextureFormat {
-        return @bitCast(c.wgpuSurfaceGetPreferredFormat(@ptrCast(self), @ptrCast(adapter)));
+        return @enumFromInt(c.wgpuSurfaceGetPreferredFormat(@ptrCast(self), @ptrCast(adapter)));
     }
 
     pub inline fn present(self: *@This()) void {
@@ -1815,11 +1815,11 @@ pub const TextureImpl = opaque {
     }
 
     pub inline fn getDimension(self: *@This()) TextureDimension {
-        return @bitCast(c.wgpuTextureGetDimension(@ptrCast(self)));
+        return @enumFromInt(c.wgpuTextureGetDimension(@ptrCast(self)));
     }
 
     pub inline fn getFormat(self: *@This()) TextureFormat {
-        return @bitCast(c.wgpuTextureGetFormat(@ptrCast(self)));
+        return @enumFromInt(c.wgpuTextureGetFormat(@ptrCast(self)));
     }
 
     pub inline fn getUsage(self: *@This()) TextureUsage {
